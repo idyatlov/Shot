@@ -4,7 +4,7 @@ import java.io.File
 
 import com.karumi.shot.domain.Config
 import com.karumi.shot.domain.model.{Folder, ScreenshotsSuite}
-import org.apache.commons.io.FileUtils
+import com.sksamuel.scrimage.nio.PngWriter
 
 class ScreenshotsSaver {
 
@@ -61,13 +61,14 @@ class ScreenshotsSaver {
     if (!screenshotsFolder.exists()) {
       screenshotsFolder.mkdirs()
     }
+    val pngWriter = new PngWriter()
     screenshots.par.foreach { screenshot =>
       val outputFile = new File(folder + screenshot.fileName)
       if (!outputFile.exists()) {
         outputFile.createNewFile()
       }
       val image = ScreenshotComposer.composeNewScreenshot(screenshot)
-      image.output(outputFile)
+      image.output(pngWriter, outputFile)
     }
   }
 

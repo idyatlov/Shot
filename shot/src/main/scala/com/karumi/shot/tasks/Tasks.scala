@@ -1,18 +1,15 @@
 package com.karumi.shot.tasks
 
-import com.android.builder.model.{BuildType, ProductFlavor}
+import com.android.builder.model.BuildType
 import com.karumi.shot.android.Adb
 import com.karumi.shot.base64.Base64Encoder
 import com.karumi.shot.reports.{ConsoleReporter, ExecutionReporter}
-import com.karumi.shot.screenshots.{
-  ScreenshotsComparator,
-  ScreenshotsDiffGenerator,
-  ScreenshotsSaver
-}
+import com.karumi.shot.screenshots.{ScreenshotsComparator, ScreenshotsDiffGenerator, ScreenshotsSaver}
 import com.karumi.shot.ui.Console
 import com.karumi.shot.{Files, Shot, ShotExtension}
-import org.gradle.api.{DefaultTask, GradleException}
+import com.sksamuel.scrimage.nio.PngWriter
 import org.gradle.api.tasks.TaskAction
+import org.gradle.api.{DefaultTask, GradleException}
 
 abstract class ShotTask extends DefaultTask {
   var appId: String = _
@@ -24,7 +21,7 @@ abstract class ShotTask extends DefaultTask {
       new Adb,
       new Files,
       new ScreenshotsComparator,
-      new ScreenshotsDiffGenerator(new Base64Encoder),
+      new ScreenshotsDiffGenerator(new Base64Encoder, new PngWriter()),
       new ScreenshotsSaver,
       console,
       new ExecutionReporter,

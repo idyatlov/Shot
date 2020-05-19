@@ -1,10 +1,10 @@
 package com.karumi.shot.base64
 
 import java.io.{ByteArrayOutputStream, File}
+import java.nio.charset.StandardCharsets
 import java.util.Base64
-import javax.imageio.ImageIO
 
-import org.apache.commons.io.Charsets
+import javax.imageio.ImageIO
 
 class Base64Encoder {
 
@@ -17,7 +17,7 @@ class Base64Encoder {
       ImageIO.write(bufferedImage, "png", outputStream)
       val diffImageBase64Encoded =
         Base64.getEncoder.encode(outputStream.toByteArray)
-      val diffBase64UTF8 = new String(diffImageBase64Encoded, Charsets.UTF_8)
+      val diffBase64UTF8 = new String(diffImageBase64Encoded, StandardCharsets.UTF_8)
       Some(diffBase64UTF8)
     } catch {
       case _: Exception => None

@@ -1,31 +1,18 @@
 package com.karumi.shot
 
 import com.android.build.gradle.api.BaseVariant
-import com.android.builder.model.{BuildType, ProductFlavor}
 import com.android.build.gradle.{AppExtension, LibraryExtension}
+import com.android.builder.model.{BuildType, ProductFlavor}
 import com.karumi.shot.android.Adb
 import com.karumi.shot.base64.Base64Encoder
 import com.karumi.shot.domain.Config
 import com.karumi.shot.exceptions.ShotException
 import com.karumi.shot.reports.{ConsoleReporter, ExecutionReporter}
-import com.karumi.shot.screenshots.{
-  ScreenshotsComparator,
-  ScreenshotsDiffGenerator,
-  ScreenshotsSaver
-}
-import com.karumi.shot.tasks.{
-  DownloadScreenshotsTask,
-  ExecuteScreenshotTests,
-  ExecuteScreenshotTestsForEveryFlavor,
-  RemoveScreenshotsTask,
-  ShotTask
-}
+import com.karumi.shot.screenshots.{ScreenshotsComparator, ScreenshotsDiffGenerator, ScreenshotsSaver}
+import com.karumi.shot.tasks._
 import com.karumi.shot.ui.Console
-import org.gradle.api.artifacts.{
-  Dependency,
-  DependencyResolutionListener,
-  ResolvableDependencies
-}
+import com.sksamuel.scrimage.nio.PngWriter
+import org.gradle.api.artifacts.{Dependency, DependencyResolutionListener, ResolvableDependencies}
 import org.gradle.api.{Plugin, Project, Task}
 
 class ShotPlugin extends Plugin[Project] {
@@ -36,7 +23,7 @@ class ShotPlugin extends Plugin[Project] {
       new Adb,
       new Files,
       new ScreenshotsComparator,
-      new ScreenshotsDiffGenerator(new Base64Encoder),
+      new ScreenshotsDiffGenerator(new Base64Encoder, new PngWriter()),
       new ScreenshotsSaver,
       console,
       new ExecutionReporter,

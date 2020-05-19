@@ -11,9 +11,10 @@ repositories {
 }
 
 dependencies {
-    compile 'org.scala-lang:scala-library:2.12.2'
+    compile 'org.scala-lang:scala-library:2.12.11'
     compile 'org.scala-lang.modules:scala-xml_2.12:1.0.6'
-    compile 'com.sksamuel.scrimage:scrimage-core_2.12:2.1.8'
+    compile 'commons-io:commons-io:2.6'
+    compile 'com.sksamuel.scrimage:scrimage-core:4.0.4'
     compile 'org.freemarker:freemarker:2.3.23'
     compile 'org.json4s:json4s-native_2.12:3.5.3'
     compile 'io.github.bitstorm:tinyzip-core:1.0.0'
