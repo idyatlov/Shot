@@ -5,6 +5,7 @@ import java.io.File
 import com.karumi.shot.domain.Config
 import com.karumi.shot.domain.model.{Folder, ScreenshotsSuite}
 import com.sksamuel.scrimage.nio.PngWriter
+import org.apache.commons.io.FileUtils
 
 class ScreenshotsSaver {
 
